@@ -1,0 +1,42 @@
+{
+    "name": "citysearch-on-socket",
+    "version": "0.0.1",
+    "description": "This is the shit!",
+    "scripts": {
+        "build-coffee": "coffee -o toolset/compiled/js/ -c sources/source/*/*.coffee",
+        "watch-coffee": "coffee -o toolset/compiled/js/ -cw sources/source/*/*.coffee",
+        "postinstall": "npm run initialize-thingy",
+        "initialize-thingy": "run-s -ns patch-stuff create-compile-folders copyscript build",
+        "bundle": "webpack-cli --config webpack.config.js",
+        "watch-bundle": "webpack-cli --config webpack-watch.config.js",
+        "watch-service": "nodemon output/service.js",
+        "test": "run-s -ns build watch",
+        "build": "run-s -ns build-coffee bundle",
+        "watch": "run-p -nsr watch-coffee watch-bundle watch-service",
+        "create-compile-folders": "toolset/thingy-build-system/service/create-compile-folders.sh",
+        "patch-stuff": "sources/patches/patch-stuff.sh",
+        "copyscript": "sources/ressources/copyscript.sh",
+        "push": "toolset/thingy-build-system/service/add-commit-and-push-all-repos.sh",
+        "pull": "toolset/thingy-build-system/service/pull-all.sh"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/JhonnyJason/citysearch-on-socket.git"
+    },
+    "author": "Lenard Frommelt",
+    "license": "Unlicense",
+    "bugs": {
+        "url": "https://github.com/JhonnyJason/citysearch-on-socket/issues"
+    },
+    "homepage": "https://github.com/JhonnyJason/citysearch-on-socket#readme",
+    "dependencies": {
+        "body-parser": "^1.18.3",
+        "coffeescript": "^2.3.2",
+        "express": "^4.16.3",
+        "nodemon": "^1.18.0",
+        "npm-run-all": "^4.1.5",
+        "systemd": "^0.3.1",
+        "webpack": "^4.29.0",
+        "webpack-cli": "^3.2.1"
+    }
+}
